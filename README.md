@@ -22,7 +22,7 @@ We provide our data for reproducing the reported results.
 The main entry for all models is in `train_sp.py`. We provide the sparse graph model.
 
 ## Citation
-
+If you find our code and datasets useful, please cite our paper.
 ```latex
 @inproceedings{DBLP:conf/ijcnn/LiQCTZZ21,
   author    = {Wanli Li and
