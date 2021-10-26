@@ -16,7 +16,9 @@ To replicate the experiments, first prepare the required dataset as below:
 
 Then use the scripts from `utils/data_utils.py` to further preprocess the data. For SemEval, the script split the original training data into two sets (labeled and unlabeled) and then separate them into multiple ratios. For TACRED, the script first perform some preprocessing to ensure the same format as SemEval.
 
-We provide our data for reproducing the reported results.
+We provide our partitioned data included in semeval path for reproducing the reported results. You can move it to dataset path for training.
+
+The graph data we construct can be downloaded in [here](https://drive.google.com/drive/folders/1ysKWT6Wx28-Ff3gvT1ALannvFJBCMABx?usp=sharing)
 
 ## Code Overview
 The main entry for all models is in `train_sp.py`. We provide the sparse graph model.
