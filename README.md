@@ -1,13 +1,11 @@
 # MRefG
-Wanli Li and Tieyun Qian: "[Exploit a Multi-head Reference Graph for Semi-supervised Relation Extraction](https://arxiv.org/abs/2112.01048)",arxiv 2021
+Wanli Li and Tieyun Qian: "[Exploit a Multi-head Reference Graph for Semi-supervised Relation Extraction](https://ieeexplore.ieee.org/document/9534434)", IJCNN 2021
 ## 1. Requirements
  To reproduce the reported results accurately, please install the specific version of each package.
 * python 3.7.10
 * torch 1.7.1
 * numpy 1.19.2
-* transformers 4.7.0
-* apex 0.1
-* apex 0.1
+
 All data should be put into `dataset/$data_name` folder in a similar format as `dataset/sample`, with a naming convention such that (1) `train-$ratio.json` indicates that certain percentage of training data are used. (2) `raw-$ratio.json` is a part of original training data, in which we assume the labels are unknown to model.
 
 To replicate the experiments, first prepare the required dataset as below:
@@ -16,34 +14,31 @@ To replicate the experiments, first prepare the required dataset as below:
 - TACRED: The TAC Relation Extraction Dataset ([download](https://catalog.ldc.upenn.edu/LDC2018T24))
   - Put the official dataset (in JSON format) under folder `dataset/tacred` in a similar format like [here](https://github.com/yuhaozhang/tacred-relation/tree/master/dataset/tacred).
 
-We provide our partitioned data included in dataset/semeval path for reproducing the reported results.
+Then use the scripts from `utils/data_utils.py` to further preprocess the data. For SemEval, the script split the original training data into two sets (labeled and unlabeled) and then separate them into multiple ratios. For TACRED, the script first perform some preprocessing to ensure the same format as SemEval.
 
+We provide our partitioned data included in semeval path for reproducing the reported results. You can move it to dataset path for training.
 
-You can use :
-python train.py --labeled_ratio 0.05 --seed 41 --teacher_num 0
-python train.py --labeled_ratio 0.05 --seed 42 --teacher_num 1
-to get teacher1 and teacher2.
-
+The graph data we construct can be downloaded in [here](https://drive.google.com/drive/folders/1ysKWT6Wx28-Ff3gvT1ALannvFJBCMABx?usp=sharing)
 
 ## Code Overview
-The main entry for all models is in `train.py`. We provide the "self-trainng + MTD" version.
+The main entry for all models is in `train_sp.py`. We provide the sparse graph model.
 
 ## Citation
 If you find our code and datasets useful, please cite our paper.
 ```latex
-@article{DBLP:journals/corr/abs-2112-01048,
+@inproceedings{DBLP:conf/ijcnn/LiQCTZZ21,
   author    = {Wanli Li and
-               Tieyun Qian},
-  title     = {From Consensus to Disagreement: Multi-Teacher Distillation for Semi-Supervised
-               Relation Extraction},
-  journal   = {CoRR},
-  volume    = {abs/2112.01048},
+               Tieyun Qian and
+               Xu Chen and
+               Kejian Tang and
+               Shaohui Zhan and
+               Tao Zhan},
+  title     = {Exploit a Multi-head Reference Graph for Semi-supervised Relation
+               Extraction},
+  booktitle = {International Joint Conference on Neural Networks, {IJCNN} 2021, Shenzhen,
+               China, July 18-22, 2021},
+  pages     = {1--7},
+  publisher = {{IEEE}},
   year      = {2021},
-  url       = {https://arxiv.org/abs/2112.01048},
-  eprinttype = {arXiv},
-  eprint    = {2112.01048},
-  timestamp = {Tue, 07 Dec 2021 12:15:54 +0100},
-  biburl    = {https://dblp.org/rec/journals/corr/abs-2112-01048.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
